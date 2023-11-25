@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .alert-error {
+            background-color: rgb(248, 107, 107);
+            border-color: rgb(235, 33, 33);
+        }
+
+        .close {
+            font-size: 20px;
+        }
+        h1{
+            color: white; 
+            text-align: center;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+        body{
+            background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20210420/pngtree-blue-and-orange-abstract-background-design-for-banner-business-image_632623.jpg');
+            background-size: cover;
+        }
+        /* Form container */
+        .registration-form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgb(190, 190, 241)
+        }
+
+        /* Form group styling */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        /* Labels */
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333; /* Darker text color */
+        }
+
+        /* Input fields */
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease-in-out; /* Smooth transition on focus */
+        }
+
+        /* Input fields on focus */
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #66afe9;
+            /* Border color changes on focus */
+        }
+
+        /* Submit button */
+        button[type="submit"] {
+            background-color: #ff5722; /* Orange color for the submit button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease-in-out; /* Smooth transition on hover */
+        }
+
+        /* Submit button on hover */
+        button[type="submit"]:hover {
+            background-color: blue; /* Darker orange on hover */
+        }
+    </style>
+  </head>
+  <body>
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>Message</strong> {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span area-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    <h1>Let's get you started!</h1>
+    <form action="/signup" method="post" class="registration-form">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          required
+          placeholder="Enter username"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="fname">First Name</label>
+        <input
+          type="text"
+          name="fname"
+          id="fname"
+          required
+          placeholder="Enter first name"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="lname">Last Name</label>
+        <input
+          type="text"
+          name="lname"
+          id="lname"
+          required
+          placeholder="Enter last name"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          required
+          placeholder="Enter your email"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="pass1">Password</label>
+        <input
+          type="password"
+          name="pass1"
+          id="pass1"
+          required
+          placeholder="Enter your password(minimum 6 charecter)"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="pass2">Confirm Password</label>
+        <input
+          type="password"
+          name="pass2"
+          id="pass2"
+          required
+          placeholder="Re-enter your password"
+        />
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const closeButtons = document.querySelectorAll('.close');
+        closeButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                this.parentNode.style.display = 'none';
+            });
+        });
+    });
+    </script>

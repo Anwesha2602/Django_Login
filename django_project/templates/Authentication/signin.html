@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/57373789a9.js" crossorigin="anonymous"></script>
+    <style>
+         .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .alert-error {
+            background-color: rgb(248, 107, 107);
+            border-color: rgb(235, 33, 33);
+        }
+
+        .close {
+            font-size: 20px;
+        }
+        .alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+      /* Styling for the centered box */
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      body{
+        background-image: url('https://img.freepik.com/premium-vector/blue-yellow-orange-abstract-background-design-poster-template-web-backdrop-banner-brochure-website-flyer-landing-page-presentation-webinar_249611-9107.jpg');
+        background-size: cover;
+      }
+      .signin-box {
+        max-width: 300px;
+        height: 350px;
+        padding: 15px;
+        background-color: #f5f5f5;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+      }
+      i{
+        margin-left: 45%;
+        font-size: 30px;
+        color: #f57c00;
+      }
+      /* Header */
+      .signin-box h1 {
+        color: rgb(58, 33, 243); /* Blue color for the header */
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      /* Labels */
+      .signin-box label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #333; /* Darker text color */
+      }
+
+      /* Input fields */
+      .signin-box input[type="text"],
+      .signin-box input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+        transition: border-color 0.3s ease-in-out; /* Smooth transition on focus */
+      }
+
+      /* Input fields on focus */
+      .signin-box input[type="text"]:focus,
+      .signin-box input[type="password"]:focus {
+        outline: none;
+        border-color: #66afe9; /* Border color changes on focus */
+      }
+
+      /* Submit button */
+      .signin-box button[type="submit"] {
+        background-color: #ff9800; /* Orange color for the submit button */
+        color: white;
+        border: none;
+        margin-top: 35px;
+        border-radius: 5px;
+        padding: 12px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+        transition: background-color 0.3s ease-in-out; /* Smooth transition on hover */
+      }
+
+      /* Submit button on hover */
+      .signin-box button[type="submit"]:hover {
+        background-color: #0000f5; /* Darker orange on hover */
+      }
+    </style>
+  </head>
+  <body>
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>Message</strong> {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span area-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    <div class="container">
+      <div class="signin-box">
+        <div><i class="fa-solid fa-circle-user"></i></div>
+        <h1>Sign-in</h1>
+        <form action="/signin" method="post">
+          {% csrf_token %}
+
+          <label>Username</label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            required
+            placeholder="enter username"
+          />
+
+          <label>Password</label>
+          <input
+            type="password"
+            name="pass1"
+            id="pass1"
+            required
+            placeholder="enter your password"
+          />
+
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const closeButtons = document.querySelectorAll('.close');
+        closeButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                this.parentNode.style.display = 'none';
+            });
+        });
+    });
+    </script>
